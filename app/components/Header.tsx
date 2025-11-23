@@ -5,7 +5,7 @@ export default function Header () {
 
             {/* Groupe de droite */}
 
-            <div className="flex items-center gap-10">
+            <div className="flflex gap-4 text-sm md:text-base text-white">
                 <div>
                     <Image src="/logo-billets-one.png" alt="Logo" width={80} height={80} />
                 </div>
@@ -19,12 +19,12 @@ export default function Header () {
 
              {/* Groupe de droite */}
             
-            <div className="flex items-center gap-5">
+            <div className="flex gap-4 text-sm md:text-base text-white">
                 <button className="border-white border-2 rounded-full px-4 py-2 ">
                     Se connecter
                 </button>
                 
-                <button className="bg-white text-black rounded-full px-4 py-2">
+                <button className="border-2 rounded-full px-3 py-1 text-sm md:px-4 md:py-2 md:text-base">
                     Créer un compte
                 </button>
             </div>
