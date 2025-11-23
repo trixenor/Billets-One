@@ -10,53 +10,56 @@ export default function Header() {
 
   return (
     <>
-      {/* HEADER PRINCIPAL */}
-      <header className="flex items-center justify-between px-6 py-4 bg-black text-white fixed w-full top-0 left-0 z-50">
+      {/* HEADER STYLE APPLE */}
+      <header className="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md text-white px-6 py-3 border-b border-white/10">
+        <div className="relative flex items-center justify-between max-w-6xl mx-auto">
 
-        {/* LEFT (mobile : menu burger) */}
-        <button 
-          className="md:hidden text-2xl" 
-          onClick={() => setOpen(true)}
-        >
-          <FiMenu />
-        </button>
+          {/* BOUTON BURGER MOBILE */}
+          <button
+            className="md:hidden text-2xl"
+            onClick={() => setOpen(true)}
+          >
+            <FiMenu />
+          </button>
 
-        {/* LOGO centré mobile / à gauche desktop */}
-        <Link href="/" className="flex items-center gap-2 mx-auto md:mx-0">
-          <Image
-            src="/logo-billets-one.png"
-            width={40}
-            height={40}
-            alt="Logo"
-          />
-          <span className="text-lg font-semibold hidden md:inline">
-            Billet One
-          </span>
-        </Link>
+          {/* LOGO CENTRÉ ●●● STYLE APPLE */}
+          <div className="absolute left-1/2 -translate-x-1/2">
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/logo-billets-one.png"
+                width={38}
+                height={38}
+                alt="Logo"
+                className="select-none"
+              />
+            </Link>
+          </div>
 
-        {/* MENU DESKTOP */}
-        <nav className="hidden md:flex items-center gap-8 text-sm">
-          <Link href="/">Accueil</Link>
-          <Link href="/contact">Contact</Link>
-          <Link href="/about">À propos</Link>
-        </nav>
+          {/* MENU DESKTOP */}
+          <nav className="hidden md:flex items-center gap-8 text-sm opacity-90">
+            <Link href="/">Accueil</Link>
+            <Link href="/contact">Contact</Link>
+            <Link href="/about">À propos</Link>
+          </nav>
 
-        {/* ICONES À DROITE */}
-        <div className="flex items-center gap-6 text-xl">
-          <FiSearch className="cursor-pointer" />
-          <FiUser className="cursor-pointer" />
+          {/* ICONES A DROITE */}
+          <div className="flex items-center gap-6 text-xl">
+            <FiSearch className="cursor-pointer" />
+            <FiUser className="cursor-pointer" />
+          </div>
         </div>
       </header>
 
-
-      {/* MENU MOBILE FULLSCREEN */}
-      <div 
-        className={`fixed inset-0 bg-black text-white flex flex-col items-center justify-center text-2xl gap-10 transition-transform duration-300 z-40
-        ${open ? "translate-x-0" : "-translate-x-full"}`}
+      {/* MENU MOBILE (SLIDE + FADE) */}
+      <div
+        className={`fixed inset-0 flex flex-col items-center justify-center bg-black/95 text-white text-2xl gap-10 
+        transition-all duration-300 ease-out z-50
+        ${open ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-full pointer-events-none"}
+        `}
       >
-        {/* Fermeture */}
-        <button 
-          className="absolute top-6 right-6 text-3xl" 
+        {/* BOUTON FERMER */}
+        <button
+          className="absolute top-6 right-6 text-3xl"
           onClick={() => setOpen(false)}
         >
           <FiX />
