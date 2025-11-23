@@ -1,40 +1,80 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { FiMenu, FiX, FiSearch, FiUser } from "react-icons/fi";
 
-export default function Header () {
-    return (
-        <header className="flex justify-between items-center p-5">
+export default function Header() {
+  const [open, setOpen] = useState(false);
 
-            {/* Groupe gauche : Logo + Menu */}
-            <div className="flex items-center gap-5">
+  return (
+    <>
+      {/* HEADER PRINCIPAL */}
+      <header className="flex items-center justify-between px-6 py-4 bg-black text-white fixed w-full top-0 left-0 z-50">
 
-                {/* Logo responsive */}
-                <Image
-                    src="/logo-billets-one.png"
-                    alt="Logo"
-                    width={60}
-                    height={60}
-                    className="md:w-[80px] md:h-[80px]"
-                />
+        {/* LEFT (mobile : menu burger) */}
+        <button 
+          className="md:hidden text-2xl" 
+          onClick={() => setOpen(true)}
+        >
+          <FiMenu />
+        </button>
 
-                {/* Menu responsive */}
-                <nav className="flex gap-3 md:gap-7 text-sm md:text-base">
-                    <a href="#">Accueil</a>
-                    <a href="#">Contact</a>
-                    <a href="#">A propos</a>
-                </nav>
-            </div>
+        {/* LOGO centré mobile / à gauche desktop */}
+        <Link href="/" className="flex items-center gap-2 mx-auto md:mx-0">
+          <Image
+            src="/logo-billets-one.png"
+            width={40}
+            height={40}
+            alt="Logo"
+          />
+          <span className="text-lg font-semibold hidden md:inline">
+            Billet One
+          </span>
+        </Link>
 
-            {/* Groupe droite : Boutons */}
-            <div className="flex items-center gap-3 md:gap-5">
-                <button className="border-white border-2 rounded-full px-3 py-1 text-sm md:px-4 md:py-2 md:text-base">
-                    Se connecter
-                </button>
+        {/* MENU DESKTOP */}
+        <nav className="hidden md:flex items-center gap-8 text-sm">
+          <Link href="/">Accueil</Link>
+          <Link href="/contact">Contact</Link>
+          <Link href="/about">À propos</Link>
+        </nav>
 
-                <button className="bg-white text-black rounded-full px-3 py-1 text-sm md:px-4 md:py-2 md:text-base">
-                    Créer un compte
-                </button>
-            </div>
+        {/* ICONES À DROITE */}
+        <div className="flex items-center gap-6 text-xl">
+          <FiSearch className="cursor-pointer" />
+          <FiUser className="cursor-pointer" />
+        </div>
+      </header>
 
-        </header>
-    );
+
+      {/* MENU MOBILE FULLSCREEN */}
+      <div 
+        className={`fixed inset-0 bg-black text-white flex flex-col items-center justify-center text-2xl gap-10 transition-transform duration-300 z-40
+        ${open ? "translate-x-0" : "-translate-x-full"}`}
+      >
+        {/* Fermeture */}
+        <button 
+          className="absolute top-6 right-6 text-3xl" 
+          onClick={() => setOpen(false)}
+        >
+          <FiX />
+        </button>
+
+        <Link href="/" onClick={() => setOpen(false)}>Accueil</Link>
+        <Link href="/contact" onClick={() => setOpen(false)}>Contact</Link>
+        <Link href="/about" onClick={() => setOpen(false)}>À propos</Link>
+
+        <div className="pt-6 flex flex-col gap-4 text-xl">
+          <button className="border border-white px-6 py-2 rounded-full">
+            Se connecter
+          </button>
+          <button className="bg-white text-black px-6 py-2 rounded-full">
+            Créer un compte
+          </button>
+        </div>
+      </div>
+    </>
+  );
 }
