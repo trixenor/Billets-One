@@ -1,28 +1,37 @@
-import EventCard from "./components/EventCard";
+// app/page.tsx
+
+import EventCard from "../components/EventCard";
 
 export default function Home() {
-  // Fausses données pour tester
+  // Fausses données pour tester la grille et le composant
   const events = [
     {
       id: 1,
       title: "Dj Gareth Emery",
       location: "Plateau, Toure F",
-      price: "4k",
-      image: "/dj-image.jpg", // Assure-toi d'avoir une image ici ou mets une URL web
+      initialLikes: 4123, // 👈 Doit être un nombre !
+      image: "/dj-image.jpg",
     },
     {
       id: 2,
       title: "Concert Magic System",
       location: "Palais de la Culture",
-      price: "10k",
+      initialLikes: 10000,
       image: "/concert-image.jpg",
     },
     {
       id: 3,
       title: "Didi B en Live",
       location: "Sofitel Ivoire",
-      price: "15k",
+      initialLikes: 1550,
       image: "/didib.jpg",
+    },
+    {
+        id: 4,
+        title: "Spectacle Tonton Zela",
+        location: "Abidjan Mall",
+        initialLikes: 980, // Moins de 1k pour tester le format
+        image: "/zela.jpg",
     },
   ];
 
@@ -34,6 +43,7 @@ export default function Home() {
         <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
           Bienvenue sur Billets-One
         </h1>
+        {/* Correction text-gray-400 pour lisibilité sur fond noir */}
         <p className="text-xl text-gray-400 max-w-2xl mx-auto">
           Découvrez les meilleurs événements à Abidjan et réservez votre place en un clic.
         </p>
@@ -44,9 +54,10 @@ export default function Home() {
         {events.map((event) => (
           <EventCard
             key={event.id}
+            eventId={event.id}
             title={event.title}
             location={event.location}
-            price={event.price}
+            initialLikes={event.initialLikes}
             imageSrc={event.image}
           />
         ))}
